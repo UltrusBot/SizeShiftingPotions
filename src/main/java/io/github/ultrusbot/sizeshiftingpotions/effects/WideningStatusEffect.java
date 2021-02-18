@@ -16,7 +16,7 @@ public class WideningStatusEffect extends StatusEffect {
     public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
         ScaleData scaleData = ScaleType.WIDTH.getScaleData(entity);
         float newScale = scaleData.getScale() * ((amplifier+1)*2);
-        newScale = Math.min(newScale, 15f);
+        newScale = Math.min(newScale, 10f);
         scaleData.setTargetScale(newScale);
         scaleData.setScaleTickDelay(scaleData.getScaleTickDelay());
     }
