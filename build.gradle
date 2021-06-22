@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.6-SNAPSHOT'
+    id 'fabric-loom' version '0.8-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -11,10 +11,7 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-    maven {
-        name = "curse"
-        url = "https://www.cursemaven.com"
-    }
+    maven { url = "https://jitpack.io" }
 
 }
 dependencies {
@@ -26,8 +23,9 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modImplementation "curse.maven:Pehkui-319596:${project.pehkui_version}"
-
+    modImplementation("com.github.virtuoel:pehkui:${project.pehkui_version}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
 }
@@ -35,13 +33,8 @@ dependencies {
 processResources {
     inputs.property "version", project.version
 
-    from(sourceSets.main.resources.srcDirs) {
-        include "fabric.mod.json"
+    filesMatching("fabric.mod.json") {
         expand "version": project.version
-    }
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude "fabric.mod.json"
     }
 }
 
