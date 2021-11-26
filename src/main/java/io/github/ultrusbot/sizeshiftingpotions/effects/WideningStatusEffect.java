@@ -3,13 +3,13 @@ package io.github.ultrusbot.sizeshiftingpotions.effects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectType;
+import net.minecraft.entity.effect.StatusEffectCategory;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleType;
 
 public class WideningStatusEffect extends StatusEffect {
     public WideningStatusEffect() {
-        super(StatusEffectType.NEUTRAL, 0xb3ffc2);
+        super(StatusEffectCategory.NEUTRAL, 0xb3ffc2);
     }
 
     @Override
