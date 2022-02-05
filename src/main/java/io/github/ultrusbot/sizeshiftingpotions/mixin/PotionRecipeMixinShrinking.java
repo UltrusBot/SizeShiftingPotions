@@ -19,7 +19,7 @@ public class PotionRecipeMixinShrinking {
     private static void registerPotionRecipe(Potion input, Item item, Potion output){
         throw new RuntimeException("Potion of Shrinking Mod Mixin, this should not be running!");
     }
-    @Inject(at = @At("TAIL"), method = "registerDefaults()V", cancellable = true)
+    @Inject(at = @At("TAIL"), method = "registerDefaults()V")
     private static void RegisterDefaults(CallbackInfo ci) {
         registerPotionRecipe(Potions.AWKWARD, Items.BROWN_MUSHROOM, SizeShiftingPotions.SHRINKING_POTION);
         registerPotionRecipe(SizeShiftingPotions.SHRINKING_POTION, Items.REDSTONE, SizeShiftingPotions.LONG_SHRINKING_POTION);

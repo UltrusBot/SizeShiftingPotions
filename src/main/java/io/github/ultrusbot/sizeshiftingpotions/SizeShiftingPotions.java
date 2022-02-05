@@ -1,42 +1,45 @@
 package io.github.ultrusbot.sizeshiftingpotions;
 
-import io.github.ultrusbot.sizeshiftingpotions.effects.GrowingStatusEffect;
-import io.github.ultrusbot.sizeshiftingpotions.effects.ShrinkingStatusEffect;
-import io.github.ultrusbot.sizeshiftingpotions.effects.ThinningStatusEffect;
-import io.github.ultrusbot.sizeshiftingpotions.effects.WideningStatusEffect;
+import io.github.ultrusbot.sizeshiftingpotions.effects.*;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class SizeShiftingPotions implements ModInitializer {
     public static final String MOD_ID = "sizeshiftingpotions";
-    public static final StatusEffect SHRINKING = new ShrinkingStatusEffect();
+
+
+    public static final StatusEffect SHRINKING = new DividingSizeStatusEffect(StatusEffectType.NEUTRAL, 0xcca468, CustomScaleTypes.SIZE);
     public static Potion SHRINKING_POTION = new Potion(new StatusEffectInstance(SHRINKING, 3600));
     public static Potion LONG_SHRINKING_POTION = new Potion(new StatusEffectInstance(SHRINKING, 9600));
     public static Potion STRONG_SHRINKING_POTION = new Potion(new StatusEffectInstance(SHRINKING, 1800, 1));
 
 
-    public static final StatusEffect GROWING = new GrowingStatusEffect();
+    public static final StatusEffect GROWING = new MultiplyingSizeStatusEffect(StatusEffectType.NEUTRAL, 0xc90000, CustomScaleTypes.SIZE);
     public static Potion GROWING_POTION = new Potion(new StatusEffectInstance(GROWING, 3600));
     public static Potion LONG_GROWING_POTION = new Potion(new StatusEffectInstance(GROWING, 9600));
     public static Potion STRONG_GROWING_POTION = new Potion(new StatusEffectInstance(GROWING, 1800, 1));
 
-    public static final StatusEffect WIDENING = new WideningStatusEffect();
+    public static final StatusEffect WIDENING = new MultiplyingSizeStatusEffect(StatusEffectType.NEUTRAL, 0xb3ffc2, CustomScaleTypes.THICKNESS);
     public static Potion WIDENING_POTION = new Potion(new StatusEffectInstance(WIDENING, 3600));
     public static Potion LONG_WIDENING_POTION = new Potion(new StatusEffectInstance(WIDENING, 9600));
     public static Potion STRONG_WIDENING_POTION = new Potion(new StatusEffectInstance(WIDENING, 1800, 1));
 
 
-    public static final StatusEffect THINNING = new ThinningStatusEffect();
+    public static final StatusEffect THINNING = new DividingSizeStatusEffect(StatusEffectType.NEUTRAL, 0xe3b3ff, CustomScaleTypes.THICKNESS);
     public static Potion THINNING_POTION = new Potion(new StatusEffectInstance(THINNING, 3600));
     public static Potion LONG_THINNING_POTION = new Potion(new StatusEffectInstance(THINNING, 9600));
     public static Potion STRONG_THINNING_POTION = new Potion(new StatusEffectInstance(THINNING, 1800, 1));
 
     @Override
     public void onInitialize() {
+
+        CustomScaleTypes.init();
+
         Registry.register(Registry.STATUS_EFFECT, new Identifier(MOD_ID, "shrinking"), SHRINKING);
         SHRINKING_POTION = Registry.register(Registry.POTION, new Identifier(MOD_ID, "shrinking"), SHRINKING_POTION);
         LONG_SHRINKING_POTION = Registry.register(Registry.POTION, new Identifier(MOD_ID, "shrinking_long"), LONG_SHRINKING_POTION);
