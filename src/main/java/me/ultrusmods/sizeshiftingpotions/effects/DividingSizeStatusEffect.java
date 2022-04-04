@@ -1,6 +1,6 @@
-package io.github.ultrusbot.sizeshiftingpotions.effects;
+package me.ultrusmods.sizeshiftingpotions.effects;
 
-import io.github.ultrusbot.sizeshiftingpotions.CustomScaleTypes;
+import me.ultrusmods.sizeshiftingpotions.config.SizeShiftingPotionsConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
@@ -18,9 +18,9 @@ public class DividingSizeStatusEffect extends StatusEffect {
     @Override
     public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
         ScaleData scaleData = scaleType.getScaleData(entity);
-        float newScale = 1.0F / ((amplifier + 1) * 2);
-        newScale = Math.max(newScale, .1f);
-        scaleData.setTargetScale(newScale);
+        double newScale = 1.0D / ((amplifier + 1) * 2);
+        newScale = Math.max(newScale, SizeShiftingPotionsConfig.minSize);
+        scaleData.setTargetScale((float) newScale);
         scaleData.setScaleTickDelay(scaleData.getScaleTickDelay());
     }
 

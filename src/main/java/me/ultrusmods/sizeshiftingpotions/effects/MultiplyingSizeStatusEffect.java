@@ -1,6 +1,6 @@
-package io.github.ultrusbot.sizeshiftingpotions.effects;
+package me.ultrusmods.sizeshiftingpotions.effects;
 
-import io.github.ultrusbot.sizeshiftingpotions.CustomScaleTypes;
+import me.ultrusmods.sizeshiftingpotions.config.SizeShiftingPotionsConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
@@ -19,10 +19,9 @@ public class MultiplyingSizeStatusEffect extends StatusEffect {
     @Override
     public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
         ScaleData scaleData = scaleType.getScaleData(entity);
-        float newScale = (amplifier + 1) * 2;
-        newScale = Math.min(newScale, 10f);
-
-        scaleData.setTargetScale(newScale);
+        double newScale = (amplifier + 1) * 2;
+        newScale = Math.min(newScale, SizeShiftingPotionsConfig.maxSize);
+        scaleData.setTargetScale((float) newScale);
         scaleData.setScaleTickDelay(scaleData.getScaleTickDelay());
     }
 

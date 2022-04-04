@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "io.github.ultrusbot.sizeshiftingpotions.mixin",
+  "package": "me.ultrusmods.sizeshiftingpotions.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "PotionRecipeMixinShrinking"
