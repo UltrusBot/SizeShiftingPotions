@@ -25,5 +25,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'MultiLoader'
+rootProject.name = 'SizeShiftingPotions'
 include("Common", "Fabric", "Forge")
