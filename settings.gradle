@@ -1,18 +1,29 @@
 pluginManagement {
+
     repositories {
+
         maven {
+
             name = 'Fabric'
             url = 'https://maven.fabricmc.net/'
         }
-        mavenCentral()
-        gradlePluginPortal()
+
         maven {
-            name = 'Quilt'
-            url = 'https://maven.quiltmc.org/repository/release'
+
+            name = 'Sponge Snapshots'
+            url = 'https://repo.spongepowered.org/repository/maven-public/'
         }
         maven {
             name = 'Cotton'
             url = 'https://server.bbkr.space/artifactory/libs-release/'
         }
+        maven {
+            url = "https://jitpack.io"
+        }
+        mavenCentral()
+        gradlePluginPortal()
     }
 }
+
+rootProject.name = 'MultiLoader'
+include("Common", "Fabric", "Forge")
