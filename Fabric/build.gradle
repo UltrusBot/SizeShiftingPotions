@@ -2,6 +2,9 @@ plugins {
     id 'fabric-loom' version '0.12-SNAPSHOT'
     id 'maven-publish'
     id 'idea'
+    id "com.github.breadmoirai.github-release" version "2.4.1"
+    id "com.modrinth.minotaur" version "2.+"
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
 archivesBaseName = "${mod_name}-fabric-${minecraft_version}"
@@ -55,6 +58,64 @@ processResources {
 
 tasks.withType(JavaCompile) {
     source(project(":Common").sourceSets.main.allSource)
+}
+
+githubRelease {
+    if (System.getenv("GH_TOKEN") != null) {
+        authorization = "Token ${System.getenv("GH_TOKEN")}"
+    }
+    owner = "UltrusBot"
+    repo = "SizeShiftingPotions"
+    targetCommitish = "1.19.2"
+    tagName = "v${project.version}-fabric"
+    releaseName = "Size Shifting Potions v${project.version}-Fabric"
+    body = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
+    releaseAssets = [remapJar, sourcesJar, javadocJar]
+}
+modrinth {
+    if (System.getenv("MODRINTH_TOKEN") != null) {
+        token = System.getenv("MODRINTH_TOKEN")
+    }
+    projectId = "sizeshiftingpotions"
+    versionType = "release"
+    uploadFile = remapJar
+    changelog = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
+    versionNumber ="v${project.version}"
+    versionName = "Size Shifting Potions v${project.version} Fabric"
+    gameVersions = ["1.19.2"]
+    loaders = ["quilt", "fabric"]
+    dependencies {
+        embedded.project "midnightlib"
+    }
+    syncBodyFrom = rootProject.file("README.md").text
+}
+curseforge {
+    if (System.getenv("CF_API_KEY") != null) {
+        apiKey = System.getenv("CF_API_KEY")
+
+    }
+    project {
+        id = "447440"
+        changelogType = "markdown"
+        changelog = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
+        releaseType = "release"
+        addGameVersion "1.19.2"
+        addGameVersion "Fabric"
+        addGameVersion "Quilt"
+        mainArtifact(remapJar) {
+            displayName = "Size Shifting Potions v${project.version} Fabric"
+
+        }
+        relations {
+            embeddedLibrary "midnightlib"
+        }
+    }
+}
+
+task releaseUpdate() {
+    dependsOn githubRelease
+    dependsOn modrinth
+    dependsOn curseforge
 }
 
 publishing {

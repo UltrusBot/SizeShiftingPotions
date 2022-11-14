@@ -1,0 +1,1 @@
+- Switched to multiloader, mod now runs on Quilt, Forge, and Fabric.

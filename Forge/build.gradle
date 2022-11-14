@@ -7,6 +7,12 @@ buildscript {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
     }
 }
+
+plugins {
+    id "com.github.breadmoirai.github-release" version "2.4.1"
+    id "com.modrinth.minotaur" version "2.+"
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
+}
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
@@ -92,7 +98,62 @@ dependencies {
 tasks.withType(JavaCompile) {
     source(project(":Common").sourceSets.main.allSource)
 }
+githubRelease {
+    if (System.getenv("GH_TOKEN") != null) {
+        authorization = "Token ${System.getenv("GH_TOKEN")}"
+    }
+    owner = "UltrusBot"
+    repo = "SizeShiftingPotions"
+    targetCommitish = "1.19.2"
+    tagName = "v${project.version}-forge"
+    releaseName = "Size Shifting Potions v${project.version}-Forge"
+    body = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
+    releaseAssets = [jar, sourcesJar, javadocJar]
+}
+modrinth {
+    if (System.getenv("MODRINTH_TOKEN") != null) {
+        token = System.getenv("MODRINTH_TOKEN")
+    }
+    projectId = "sizeshiftingpotions"
+    versionType = "release"
+    uploadFile = jar
+    changelog = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
+    versionNumber ="v${project.version}"
+    versionName = "Size Shifting Potions v${project.version} Forge"
+    gameVersions = ["1.19.2"]
+    loaders = ["forge"]
+    dependencies {
+        embedded.project "midnightlib"
+    }
+    syncBodyFrom = rootProject.file("README.md").text
+}
+curseforge {
+    if (System.getenv("CF_API_KEY") != null) {
+        apiKey = System.getenv("CF_API_KEY")
 
+    }
+    project {
+        id = "447440"
+        changelogType = "markdown"
+        changelog = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
+        releaseType = "release"
+        addGameVersion "1.19.2"
+        addGameVersion "Forge"
+        mainArtifact(jar) {
+            displayName = "Size Shifting Potions v${project.version} Forge"
+
+        }
+        relations {
+            embeddedLibrary "midnightlib"
+        }
+    }
+}
+
+task releaseUpdate() {
+    dependsOn githubRelease
+    dependsOn modrinth
+    dependsOn curseforge
+}
 processResources {
     from project(":Common").sourceSets.main.resources
 }
