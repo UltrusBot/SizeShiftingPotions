@@ -54,6 +54,9 @@ processResources {
     filesMatching("fabric.mod.json") {
         expand "version": project.version
     }
+    filesMatching('*.mixins.json') {
+        expand "refmap_target": "${archivesBaseName}-"
+    }
 }
 
 tasks.withType(JavaCompile) {
@@ -86,6 +89,7 @@ modrinth {
     loaders = ["quilt", "fabric"]
     dependencies {
         embedded.project "midnightlib"
+        required.project "pehkui"
     }
     syncBodyFrom = rootProject.file("README.md").text
 }
@@ -108,6 +112,7 @@ curseforge {
         }
         relations {
             embeddedLibrary "midnightlib"
+            requiredDependency "pehkui"
         }
     }
 }

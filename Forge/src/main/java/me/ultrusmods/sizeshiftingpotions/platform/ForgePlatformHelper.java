@@ -1,6 +1,6 @@
-package me.ultrusmods.sizeshiftingpoitons.platform;
+package me.ultrusmods.sizeshiftingpotions.platform;
 
-import me.ultrusmods.sizeshiftingpoitons.config.SizeShiftingPotionsConfigForge;
+import me.ultrusmods.sizeshiftingpotions.config.SizeShiftingPotionsConfigForge;
 import me.ultrusmods.sizeshiftingpotions.platform.services.IPlatformHelper;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;

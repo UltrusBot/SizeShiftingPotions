@@ -1,1 +1,2 @@
-- Switched to multiloader, mod now runs on Quilt, Forge, and Fabric.
+- Fixed mixin refmap issue.
+- Fixed forge version not having midnightlib, and various other issues.

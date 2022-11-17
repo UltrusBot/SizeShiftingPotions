@@ -5,6 +5,7 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 
@@ -16,9 +17,12 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
+apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'maven-publish'
-
+jarJar.enable()
 archivesBaseName = "${mod_name}-forge-${minecraft_version}"
+
+
 
 repositories {
     maven { url = "https://jitpack.io" }
@@ -88,13 +92,19 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     compileOnly project(":Common")
     implementation fg.deobf("com.github.Virtuoel:Pehkui:${pehkui_version}-1.19-forge")
-    jarJar(group: 'eu.midnightdust.midnightlib', name: "MidnightLib", version: '[1.0.0)') {
-        jarJar.pin(it, project.midnightlib_version)
+    jarJar(group: 'maven.modrinth', name: "codAaoxh", version: '[1.0.0-forge,)') {
+        jarJar.pin(it, "${project.midnightlib_version}-forge")
     }
     implementation fg.deobf("maven.modrinth:midnightlib:${project.midnightlib_version}-forge")
 
 }
 
+tasks.build.dependsOn tasks.jarJar
+tasks.jarJar.archiveClassifier.set("");
+reobf {
+    jarJar {}
+}
+tasks.jarJar.finalizedBy("reobfJarJar")
 tasks.withType(JavaCompile) {
     source(project(":Common").sourceSets.main.allSource)
 }
@@ -124,6 +134,7 @@ modrinth {
     loaders = ["forge"]
     dependencies {
         embedded.project "midnightlib"
+        required.project "pehkui"
     }
     syncBodyFrom = rootProject.file("README.md").text
 }
@@ -145,6 +156,7 @@ curseforge {
         }
         relations {
             embeddedLibrary "midnightlib"
+            requiredDependency "pehkui"
         }
     }
 }
@@ -156,9 +168,17 @@ task releaseUpdate() {
 }
 processResources {
     from project(":Common").sourceSets.main.resources
+
+    filesMatching('*.mixins.json') {
+        expand "refmap_target": "${mod_id}."
+    }
 }
 
-
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+    config "${mod_id}.forge.mixins.json"
+    config "${mod_id}.mixins.json"
+}
 jar.finalizedBy('reobfJar')
 
 publishing {

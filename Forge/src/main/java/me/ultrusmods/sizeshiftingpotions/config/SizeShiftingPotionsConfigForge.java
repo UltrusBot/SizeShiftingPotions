@@ -1,4 +1,4 @@
-package me.ultrusmods.sizeshiftingpoitons.config;
+package me.ultrusmods.sizeshiftingpotions.config;
 
 import eu.midnightdust.lib.config.MidnightConfig;
 

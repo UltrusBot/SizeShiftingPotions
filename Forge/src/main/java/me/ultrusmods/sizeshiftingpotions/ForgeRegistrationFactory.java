@@ -1,4 +1,4 @@
-package me.ultrusmods.sizeshiftingpoitons;
+package me.ultrusmods.sizeshiftingpotions;
 
 import me.ultrusmods.sizeshiftingpotions.register.RegistrationProvider;
 import me.ultrusmods.sizeshiftingpotions.register.RegistryObject;

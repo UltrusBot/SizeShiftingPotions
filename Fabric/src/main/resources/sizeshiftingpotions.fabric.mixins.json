@@ -4,6 +4,7 @@
   "package": "me.ultrusmods.sizeshiftingpotions.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "PotionRecipeMixinShrinking"
   ],
   "client": [
   ],
