@@ -100,6 +100,10 @@ dependencies {
 }
 
 tasks.build.dependsOn tasks.jarJar
+tasks.curseforge.dependsOn tasks.jarJar
+tasks.githubRelease.dependsOn tasks.jarJar
+tasks.modrinth.dependsOn tasks.jarJar
+
 tasks.jarJar.archiveClassifier.set("");
 reobf {
     jarJar {}
@@ -118,7 +122,7 @@ githubRelease {
     tagName = "v${project.version}-forge"
     releaseName = "Size Shifting Potions v${project.version}-Forge"
     body = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
-    releaseAssets = [jarJar, sourcesJar, javadocJar]
+    releaseAssets = [jar, sourcesJar, javadocJar]
 }
 modrinth {
     if (System.getenv("MODRINTH_TOKEN") != null) {
@@ -126,7 +130,7 @@ modrinth {
     }
     projectId = "sizeshiftingpotions"
     versionType = "release"
-    uploadFile = jarJar
+    uploadFile = jar
     changelog = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
     versionNumber ="v${project.version}"
     versionName = "Size Shifting Potions v${project.version} Forge"
@@ -150,7 +154,7 @@ curseforge {
         releaseType = "release"
         addGameVersion "1.19.2"
         addGameVersion "Forge"
-        mainArtifact(jarJar) {
+        mainArtifact(jar) {
             displayName = "Size Shifting Potions v${project.version} Forge"
 
         }
