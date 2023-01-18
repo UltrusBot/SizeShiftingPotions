@@ -69,7 +69,7 @@ githubRelease {
     }
     owner = "UltrusBot"
     repo = "SizeShiftingPotions"
-    targetCommitish = "1.19.2"
+    targetCommitish = "1.19.3"
     tagName = "v${project.version}-fabric"
     releaseName = "Size Shifting Potions v${project.version}-Fabric"
     body = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
@@ -85,7 +85,7 @@ modrinth {
     changelog = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
     versionNumber ="v${project.version}"
     versionName = "Size Shifting Potions v${project.version} Fabric"
-    gameVersions = ["1.19.2"]
+    gameVersions = ["1.19.3"]
     loaders = ["quilt", "fabric"]
     dependencies {
         embedded.project "midnightlib"
@@ -103,7 +103,7 @@ curseforge {
         changelogType = "markdown"
         changelog = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
         releaseType = "release"
-        addGameVersion "1.19.2"
+        addGameVersion "1.19.3"
         addGameVersion "Fabric"
         addGameVersion "Quilt"
         mainArtifact(remapJar) {

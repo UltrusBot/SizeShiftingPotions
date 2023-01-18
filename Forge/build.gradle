@@ -91,7 +91,7 @@ sourceSets.main.resources.srcDir 'src/generated/resources'
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     compileOnly project(":Common")
-    implementation fg.deobf("com.github.Virtuoel:Pehkui:${pehkui_version}-1.19-forge")
+    implementation fg.deobf("com.github.Virtuoel:Pehkui:${pehkui_version}-1.19.3-forge")
     jarJar(group: 'maven.modrinth', name: "codAaoxh", version: '[1.0.0-forge,)') {
         jarJar.pin(it, "${project.midnightlib_version}-forge")
     }
@@ -118,7 +118,7 @@ githubRelease {
     }
     owner = "UltrusBot"
     repo = "SizeShiftingPotions"
-    targetCommitish = "1.19.2"
+    targetCommitish = "1.19.3"
     tagName = "v${project.version}-forge"
     releaseName = "Size Shifting Potions v${project.version}-Forge"
     body = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
@@ -134,7 +134,7 @@ modrinth {
     changelog = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
     versionNumber ="v${project.version}"
     versionName = "Size Shifting Potions v${project.version} Forge"
-    gameVersions = ["1.19.2"]
+    gameVersions = ["1.19.3"]
     loaders = ["forge"]
     dependencies {
         embedded.project "midnightlib"
@@ -152,7 +152,7 @@ curseforge {
         changelogType = "markdown"
         changelog = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
         releaseType = "release"
-        addGameVersion "1.19.2"
+        addGameVersion "1.19.3"
         addGameVersion "Forge"
         mainArtifact(jar) {
             displayName = "Size Shifting Potions v${project.version} Forge"

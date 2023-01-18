@@ -2,6 +2,7 @@ package me.ultrusmods.sizeshiftingpotions.register;
 
 import me.ultrusmods.sizeshiftingpotions.Constants;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.Potion;
 
@@ -9,7 +10,7 @@ import java.util.function.Supplier;
 
 // Gotta stick with my name convention, even if it leads to this.
 public class SizeShiftingPotionsPotions {
-    public static final RegistrationProvider<Potion> POTIONS = RegistrationProvider.get(Registry.POTION_REGISTRY, Constants.MOD_ID);
+    public static final RegistrationProvider<Potion> POTIONS = RegistrationProvider.get(Registries.POTION, Constants.MOD_ID);
 
     public static RegistryObject<Potion> GROWING_POTION = register("growing", () -> new Potion(new MobEffectInstance(SizeShiftingPotionsEffects.GROWING.get(), 3600)));
     public static RegistryObject<Potion> LONG_GROWING_POTION = register("growing_long", () -> new Potion(new MobEffectInstance(SizeShiftingPotionsEffects.GROWING.get(), 9600)));

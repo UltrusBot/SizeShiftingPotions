@@ -1,2 +1,1 @@
-- Fixed mixin refmap issue.
-- Fixed forge version not having midnightlib, and various other issues.
+- Update to 1.19.3.
