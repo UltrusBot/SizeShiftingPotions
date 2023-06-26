@@ -27,7 +27,7 @@ minecraft {
 dependencies {
     compileOnly group:'org.spongepowered', name:'mixin', version:'0.8.5'
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
-    compileOnly("com.github.virtuoel:pehkui:${pehkui_version}-1.19.3-forge") {
+    compileOnly("com.github.virtuoel:pehkui:${pehkui_version}-1.20.1-forge") {
         exclude(group: "net.fabricmc.fabric-api")
     }
 }

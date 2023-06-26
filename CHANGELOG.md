@@ -1,1 +1,2 @@
-- Update to 1.19.4.
+- Update to 1.20.1
+- Switch publication to GitHub Actions instead of using gradle plugins.
