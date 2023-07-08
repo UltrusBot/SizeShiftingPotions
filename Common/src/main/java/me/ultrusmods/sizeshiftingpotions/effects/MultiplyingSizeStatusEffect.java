@@ -20,7 +20,7 @@ public class MultiplyingSizeStatusEffect extends MobEffect {
     @Override
     public void addAttributeModifiers(LivingEntity entity, AttributeMap attributes, int amplifier) {
         ScaleData scaleData = scaleType.getScaleData(entity);
-        double newScale = (amplifier + 1) * 2;
+        double newScale = (amplifier + 1) * Services.PLATFORM.getSizeChangeFactor();
         newScale = Math.min(newScale, Services.PLATFORM.getMaxSize());
         scaleData.setTargetScale((float) newScale);
         scaleData.setScaleTickDelay(scaleData.getScaleTickDelay());

@@ -20,7 +20,7 @@ public class DividingSizeStatusEffect extends MobEffect {
     @Override
     public void addAttributeModifiers(LivingEntity entity, AttributeMap attributes, int amplifier) {
         ScaleData scaleData = scaleType.getScaleData(entity);
-        double newScale = 1.0D / ((amplifier + 1) * 2);
+        double newScale = 1.0D / ((amplifier + 1) * Services.PLATFORM.getSizeChangeFactor());
         newScale = Math.max(newScale, Services.PLATFORM.getMinSize());
         scaleData.setTargetScale((float) newScale);
         scaleData.setScaleTickDelay(scaleData.getScaleTickDelay());

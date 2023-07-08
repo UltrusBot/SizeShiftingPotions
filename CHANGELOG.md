@@ -1,1 +1,2 @@
-- Update to 1.20.1
+- Fix forge not loading due to accidentally removing JIJ
+- Added a config option to change the size changing factor.

@@ -8,6 +8,9 @@ public class SizeShiftingPotionsConfigFabric extends MidnightConfig{
     @Entry(min = 0.01d, max = .1d)
     public static double minSize = .1d;
 
+    @Entry(min = 1d, max = 3d)
+    public static double sizeChangeFactor = 2d;
+
     @Comment public static Comment requireRestart;
     @Entry public static boolean growingPotion = true;
     @Entry public static boolean shrinkingPotion = true;

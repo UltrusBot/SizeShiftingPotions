@@ -103,7 +103,6 @@ dependencies {
 
 }
 
-tasks.build.dependsOn tasks.jarJar
 
 tasks.jarJar.archiveClassifier.set("");
 reobf {
@@ -128,6 +127,12 @@ var mod = createModReleaseMetadata(
 modrinthInfo(mod, "sizeshiftingpotions", ["pehkui"], [], [], ["midnightlib"])
 githubInfo(mod, "UltrusBot", "SizeShiftingPotions", "1.20")
 curseforgeInfo(mod, TaskPublishCurseForge, "447440", ["midnightlib"], ["pehkui"])
+
+tasks.build.dependsOn tasks.jarJar
+tasks.publishCurseForge.dependsOn tasks.jarJar
+tasks.githubRelease.dependsOn tasks.jarJar
+tasks.modrinth.dependsOn tasks.jarJar
+
 
 task releaseUpdate() {
     dependsOn githubRelease

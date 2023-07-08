@@ -32,6 +32,11 @@ public class FabricPlatformHelper implements IPlatformHelper {
     }
 
     @Override
+    public double getSizeChangeFactor() {
+        return SizeShiftingPotionsConfigFabric.sizeChangeFactor;
+    }
+
+    @Override
     public boolean getGrowingPotion() {
         return SizeShiftingPotionsConfigFabric.growingPotion;
     }

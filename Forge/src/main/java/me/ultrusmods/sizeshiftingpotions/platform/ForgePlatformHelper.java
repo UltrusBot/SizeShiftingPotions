@@ -36,6 +36,11 @@ public class ForgePlatformHelper implements IPlatformHelper {
     }
 
     @Override
+    public double getSizeChangeFactor() {
+        return SizeShiftingPotionsConfigForge.sizeChangeFactor;
+    }
+
+    @Override
     public boolean getGrowingPotion() {
         return SizeShiftingPotionsConfigForge.growingPotion;
     }

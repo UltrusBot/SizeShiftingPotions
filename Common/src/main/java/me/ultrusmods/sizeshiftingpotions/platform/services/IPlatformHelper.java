@@ -27,6 +27,7 @@ public interface IPlatformHelper {
 
     double getMaxSize();
     double getMinSize();
+    double getSizeChangeFactor();
     boolean getGrowingPotion();
     boolean getShrinkingPotion();
     boolean getWideningPotion();
