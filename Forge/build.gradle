@@ -99,7 +99,8 @@ dependencies {
     jarJar(group: 'maven.modrinth', name: "codAaoxh", version: '[1.4.1-forge,)') {
         jarJar.pin(it, "${project.midnightlib_version}-forge")
     }
-    implementation fg.deobf("maven.modrinth:midnightlib:${project.midnightlib_version}-forge")
+    jarJar("maven.modrinth:codAaoxh:[1.4.1-forge,)")
+//    implementation fg.deobf("maven.modrinth:midnightlib:${project.midnightlib_version}-forge")
 
 }
 
