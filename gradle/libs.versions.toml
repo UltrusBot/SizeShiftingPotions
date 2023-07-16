@@ -1,0 +1,30 @@
+[versions]
+minecraft = "1.20.1"
+fabric_loader = "0.14.21"
+fabric_api = "0.84.0+1.20.1"
+forge = "1.20.1-47.0.19"
+midnightlib_forge = "1.4.1-forge"
+midnightlib_fabric = "1.4.1-fabric"
+pehkui_fabric = "3.7.7"
+pehkui_forge = "3.7.7-1.20.1-forge"
+
+# Extra Libraries
+emi = "1.0.5+1.20.1"
+
+
+
+[libraries]
+minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
+fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
+forge = { module = "net.minecraftforge:forge", version.ref = "forge" }
+
+# Extra Libraries
+emi = { module = "dev.emi:emi-fabric", version.ref = "emi" }
+midnightlib_forge = { module = "maven.modrinth:midnightlib", version.ref = "midnightlib_forge" }
+midnightlib_fabric = { module = "maven.modrinth:midnightlib", version.ref = "midnightlib_fabric" }
+pehkui_fabric = { module = "com.github.Virtuoel:Pehkui", version.ref = "pehkui_fabric" }
+pehkui_forge = { module = "com.github.Virtuoel:Pehkui", version.ref = "pehkui_forge" }
+
+#[plugins]
+#machete = { id = "io.github.p03w.machete", version.ref = "machete" }
