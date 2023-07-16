@@ -1,0 +1,119 @@
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+plugins {
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "com.github.breadmoirai.github-release" version "2.4.1"
+    id "com.modrinth.minotaur" version "2.+"
+    id 'net.darkhax.curseforgegradle' version '1.1.15'
+}
+apply from: "https://raw.githubusercontent.com/UltrusBot/GradleScripts/${project.upload_script_version}/release.gradle"
+
+
+repositories {
+    maven { url 'https://jitpack.io' }
+    maven {
+        url = "https://api.modrinth.com/maven"
+    }
+}
+
+architectury {
+    platformSetupLoomIde()
+    forge()
+}
+
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+
+    forge {
+        convertAccessWideners = true
+        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+
+        mixinConfig "sizeshiftingpotions-common.mixins.json"
+        mixinConfig "sizeshiftingpotions.mixins.json"
+    }
+}
+
+configurations {
+    common
+    shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentForge.extendsFrom common
+}
+
+dependencies {
+    forge libs.forge
+    modApi libs.pehkui.forge.get()
+    modImplementation include(libs.midnightlib.forge.get())
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+}
+
+var mod = createModReleaseMetadata(
+        "Size Shifting Potions v${project.version} Forge",
+        file("$rootDir/CHANGELOG.md"),
+        ["1.20.1"],
+        ["forge"],
+        "remapJar",
+        ["remapSourcesJar"],
+        "v${project.version}-forge",
+        false
+)
+modrinthInfo(mod, "sizeshiftingpotions", ["pehkui"], [], [], ["midnightlib"])
+githubInfo(mod, "UltrusBot", "SizeShiftingPotions", "1.20")
+curseforgeInfo(mod, TaskPublishCurseForge, "447440", ["midnightlib"], ["pehkui"])
+
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("META-INF/mods.toml") {
+        expand "version": project.version
+    }
+}
+
+shadowJar {
+    exclude "fabric.mod.json"
+    exclude "architectury.common.json"
+
+    configurations = [project.configurations.shadowCommon]
+    classifier "dev-shadow"
+}
+
+remapJar {
+    input.set shadowJar.archiveFile
+    dependsOn shadowJar
+    classifier null
+    afterEvaluate {
+        archiveClassifier = "forge"
+    }
+}
+
+jar {
+    classifier "dev"
+}
+
+sourcesJar {
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
+}
+
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+        skip()
+    }
+}
+
+publishing {
+    publications {
+        mavenForge(MavenPublication) {
+            artifactId = rootProject.archives_base_name + "-" + project.name
+            from components.java
+        }
+    }
+
+    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+    repositories {
+        // Add repositories to publish to here.
+    }
+}
