@@ -1,2 +1,3 @@
-- Fix forge not loading due to accidentally removing JIJ
-- Added a config option to change the size changing factor.
+- Rewrite mod to use arch loom
+- Fixed forge version not including midnightlib
+- Added size change factor to the config, which allows you to change the factor at which the potions change your size.
