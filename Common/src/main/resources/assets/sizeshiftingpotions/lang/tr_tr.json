@@ -61,5 +61,5 @@
     "sizeshiftingpotions.midnightconfig.useNetherFungus": "Nether Mantarı Kullan",
     "sizeshiftingpotions.midnightconfig.netherFungus": "Bu, tariflerin dünya mantarları yerine nether mantarlarını kullanmasını sağlar.",
     "sizeshiftingpotions.midnightconfig.requireRestart": "Aşağıdaki tüm ayarların uygulanması için oyunun yeniden başlatılmasını gerekir."
-  
+    "sizeshiftingpotions.midnightconfig.sizeChangeFactor": "Boyut Değiştirme Ölçeği"
   }
