@@ -17,6 +17,7 @@ public class CustomScaleTypes {
     private static ScaleType registerScale(String id, ScaleModifier dependantModifier) {
         final ScaleType.Builder builder = ScaleType.Builder.create().affectsDimensions();
 
+        builder.addDependentModifier(ScaleModifiers.REACH_MULTIPLIER);
         builder.addDependentModifier(dependantModifier);
 
         return ScaleRegistries.register(ScaleRegistries.SCALE_TYPES,
@@ -32,6 +33,8 @@ public class CustomScaleTypes {
         ScaleTypes.WIDTH.getDefaultBaseValueModifiers().add(SIZE_MODIFIER);
         ScaleTypes.VISIBILITY.getDefaultBaseValueModifiers().add(SIZE_MODIFIER);
         ScaleTypes.MOTION.getDefaultBaseValueModifiers().add(SIZE_MODIFIER);
+
+        ScaleTypes.REACH.getDefaultBaseValueModifiers().add(SIZE_MODIFIER);
 
         ScaleTypes.WIDTH.getDefaultBaseValueModifiers().add(THICKNESS_MODIFIER);
     }
