@@ -19,12 +19,9 @@ public class MultiplyingSizeStatusEffect extends StatusEffect {
     @Override
     public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
         ScaleData scaleData = scaleType.getScaleData(entity);
-
-
         double newScale = (amplifier + 1) * SizeShiftingPotionsConfig.sizeChangeFactor;
         newScale = Math.min(newScale, SizeShiftingPotionsConfig.maxSize);
         scaleData.setTargetScale((float) newScale);
-
         scaleData.setScaleTickDelay(scaleData.getScaleTickDelay());
     }
 
