@@ -11,6 +11,12 @@ public class SizeShiftingPotionsConfig extends MidnightConfig {
     @Entry(min = 1d, max = 3d)
     public static double sizeChangeFactor = 2d;
 
+    @Entry(min = 0d, max = 3d)
+    public static double speedChangeFactor = 1d;
+    @Entry public static ShrinkSpeedMode shrinkSpeedMode = ShrinkSpeedMode.ON;
+
+    public enum ShrinkSpeedMode { OFF, ON, NOT_WHEN_ABOVE_ONE }
+
     @Comment public static Comment requireRestart;
     @Entry public static boolean growingPotion = true;
     @Entry public static boolean shrinkingPotion = true;
